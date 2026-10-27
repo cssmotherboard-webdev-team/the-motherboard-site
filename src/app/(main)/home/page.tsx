@@ -1,8 +1,8 @@
-import News from "./sections/news"
-import EditorsPicks from "./sections/editorsPicks"
-import Sports from "./sections/sports"
-import Feature from "./sections/feature"
-import LatestPhotos from "./sections/latestPhotos"
+import News from "../sections/news"
+import EditorsPicks from "../sections/editorsPicks"
+import Sports from "../sections/sports"
+import Feature from "../sections/feature"
+import LatestPhotos from "../sections/latestPhotos"
 
 export default function Home() {
   return (
