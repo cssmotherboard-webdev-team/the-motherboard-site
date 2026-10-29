@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import PageLoadPopup from "./modal.tsx";
+import PageLoadPopup from "./modal";
 
 export default function Home() {
   return (

@@ -1,5 +1,9 @@
+"use client";
 
-type Member = {
+import { useState } from "react";
+import MemberSettingsModal from "./MemberSettingsModal";
+
+export type Member = {
   id: string;
   email: string;
   level: "level_1" | "level_2" | "level_3";
@@ -18,11 +22,15 @@ const levelLabels: Record<Member["level"], string> = {
 };
 
 export default function MembersList({ members }: MembersListProps) {
+  const [selectedMember, setSelectedMember] = useState<Member | null>(null);
+
   return (
     <div className="mt-5 min-w-0">
       {/* Column headings */}
-      <div className="grid grid-cols-[64px_minmax(0,1fr)_100px_40px] items-center gap-2 px-1
-        sm:grid-cols-[72px_minmax(0,1fr)_120px_40px] sm:gap-4">
+      <div
+        className="grid grid-cols-[64px_minmax(0,1fr)_100px_40px] items-center gap-2 px-1
+        sm:grid-cols-[72px_minmax(0,1fr)_120px_40px] sm:gap-4"
+      >
         <span aria-hidden="true" />
 
         <h3 className="text-center text-2xl font-semibold text-black">
@@ -86,13 +94,14 @@ export default function MembersList({ members }: MembersListProps) {
                 </span>
               </div>
 
-              {/* Settings placeholder */}
+              {/* Settings button */}
               <button
                 type="button"
-                disabled
+                onClick={() => setSelectedMember(member)}
                 aria-label={`Settings for ${member.email}`}
-                title="Member settings coming next"
-                className="h-10 w-10 rounded-md bg-[#FFE0A3] text-lg text-gray-700 opacity-80"
+                title="Member settings"
+                className="h-10 w-10 rounded-md bg-[#FFE0A3] text-lg
+                text-gray-700 opacity-80 hover:bg-[#FFCE7B]"
               >
                 <span aria-hidden="true">⋯</span>
               </button>
@@ -100,6 +109,13 @@ export default function MembersList({ members }: MembersListProps) {
           ))
         )}
       </div>
+
+      {/* Member settings modal */}
+      <MemberSettingsModal
+        isOpen={selectedMember !== null}
+        member={selectedMember}
+        onClose={() => setSelectedMember(null)}
+      />
     </div>
   );
 }
